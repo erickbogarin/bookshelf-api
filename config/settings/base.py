@@ -14,7 +14,7 @@ import environ
 
 ROOT_DIR = environ.Path(__file__) - 3
 
-APPS_DIR = ROOT_DIR.path('app')
+APPS_DIR = ROOT_DIR.path('apps')
 
 env = environ.Env()
 
@@ -48,9 +48,11 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+        'rest_framework',
 )
 
 LOCAL_APPS = (
+        'apps.bookshelf',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -149,3 +151,6 @@ STATICFILES_FINDERS = (
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = str(APPS_DIR('media'))
+
+REST_FRAMEWORK = {
+        }
