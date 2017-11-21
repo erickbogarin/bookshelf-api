@@ -48,12 +48,13 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-        'rest_framework',
+    'rest_framework',
+    'whitenoise.runserver_nostatic',
 )
 
 LOCAL_APPS = (
-        'apps.bookshelf',
-        'apps.user',
+    'apps.bookshelf',
+    'apps.user',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -154,4 +156,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = str(APPS_DIR('media'))
 
 REST_FRAMEWORK = {
-        }
+}
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
