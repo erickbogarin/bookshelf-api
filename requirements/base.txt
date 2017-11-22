@@ -1,4 +1,14 @@
+# Bleeding edge Django
 Django==1.11.7
+
+# Configuration
 django-environ==0.4.4
-djangorestframework==3.7.3
 whitenoise==3.2
+
+# Web API
+djangorestframework==3.7.3
+
+# For user registration, either via email or social
+django-allauth==0.34.0
+django-rest-auth==0.9.2
+djangorestframework-jwt==1.11

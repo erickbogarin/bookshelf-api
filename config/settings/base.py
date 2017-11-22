@@ -43,15 +43,23 @@ DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.sites',
+    # 'django.contrib.messages',
     'django.contrib.staticfiles',
 )
-
 THIRD_PARTY_APPS = (
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+
     'whitenoise.runserver_nostatic',
 )
 
+# Apps specific for this project go here.
 LOCAL_APPS = (
     'apps.bookshelf',
     'apps.user',
@@ -59,6 +67,22 @@ LOCAL_APPS = (
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+# GENERAL CONFIGURATION
+# ------------------------------------------------------------------------------
+SITE_ID = 1
+
+# AUTHENTICATION CONFIGURATION
+# ------------------------------------------------------------------------------
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# Enable JWT Authentication instead of Token/Session based.
+REST_USE_JWT = True
+
+
+# MIDDLEWARE CONFIGURATION
+# ------------------------------------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -151,11 +175,19 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+# Use Whitenoise to serve static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# MEDIA CONFIGURATION
+# ------------------------------------------------------------------------------
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = str(APPS_DIR('media'))
 
+# REST FRAMEWORK CONFIGURATION
+# ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
 }
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
