@@ -13,6 +13,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
-        user = User.objects.create(is_active=False, **user_data)
+        user = User.objects.create(
+            is_active=False, **user_data)
         author = Author.objects.create(user=user, **validated_data)
         return author
