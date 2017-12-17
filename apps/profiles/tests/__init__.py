@@ -1,0 +1,1 @@
+from .tests_api import AuthorTests
