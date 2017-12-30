@@ -21,6 +21,7 @@ apipatterns = [
     url(r'^', include('apps.bookshelf.urls')),
     url(r'^', include('apps.user.urls')),
     url(r'^', include('apps.profiles.urls')),
+    url(r'^', include('apps.products.urls')),
 ]
 
 urlpatterns = [
