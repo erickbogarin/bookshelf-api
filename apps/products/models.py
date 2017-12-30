@@ -11,7 +11,6 @@ class Category(models.Model):
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Category, self).save(*args, **kwargs)
