@@ -1,1 +1,1 @@
-from .tests_api import AuthorTests
+from .test_views import CreateAuthorTest, GetAllAuthorsTest, DeleteSingleAuthorTest, UpdateSingleAuthorTest
