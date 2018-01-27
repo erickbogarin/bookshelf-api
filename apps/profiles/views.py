@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
@@ -9,6 +9,10 @@ from apps.profiles.serializers import AuthorSerializer
 class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
+
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('user__first_name', 'user__last_name', 'user__email',)
+    ordering_fields = '__all__'
 
     def update(self, request, pk=None):
         serializer_context = {'request': request}
