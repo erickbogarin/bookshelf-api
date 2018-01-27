@@ -24,7 +24,8 @@ class BookSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(read_only=True)
 
     author = AuthorRelatedField(read_only=True)
-    author_id = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), write_only=True, source='author')
+    author_id = serializers.PrimaryKeyRelatedField(
+        queryset=Author.objects.all(), write_only=True, source='author')
 
     categories = CategorySerializer(read_only=True, many=True)
     categories_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(),

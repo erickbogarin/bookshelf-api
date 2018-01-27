@@ -23,7 +23,7 @@ class GetAllAuthorsTest(TestCase):
 
     def test_get_all_authors(self):
         """
-        Ensure we get all users created        
+        Ensure we get all users created
         """
 
         url = reverse('author-list')
@@ -34,7 +34,8 @@ class GetAllAuthorsTest(TestCase):
                 format='json'
             ),
         }
-        serializer = AuthorSerializer(authors, many=True, context=serializer_context)
+        serializer = AuthorSerializer(
+            authors, many=True, context=serializer_context)
 
         response = self.client.get(url)
 
@@ -144,9 +145,12 @@ class UpdateSingleAuthorTest(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['user']['username'], author_data['user']['username'])
-        self.assertEqual(response.data['user']['first_name'], author_data['user']['first_name'])
-        self.assertEqual(response.data['user']['last_name'], author_data['user']['last_name'])
+        self.assertEqual(
+            response.data['user']['username'], author_data['user']['username'])
+        self.assertEqual(
+            response.data['user']['first_name'], author_data['user']['first_name'])
+        self.assertEqual(
+            response.data['user']['last_name'], author_data['user']['last_name'])
 
     def test_fails_to_update_if_author_username_field_is_duplicate(self):
         """

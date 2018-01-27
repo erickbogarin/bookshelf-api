@@ -13,6 +13,7 @@ class BookViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     ordering = ('-date_published', 'title')
 
+
 class CategoryViewSet(viewsets.ModelViewSet):
     """
     A viewset for viewing and editing categories instances.
