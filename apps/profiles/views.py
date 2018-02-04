@@ -10,9 +10,9 @@ class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
 
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('user__first_name', 'user__last_name', 'user__email',)
-    ordering_fields = '__all__'
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('user__first_name', 'user__last_name',)
+    ordering_fields = ('user__first_name', 'user__last_name',)
 
     def update(self, request, pk=None):
         serializer_context = {'request': request}
