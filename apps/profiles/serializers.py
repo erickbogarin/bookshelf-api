@@ -12,7 +12,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ['bio', 'image', 'user']
+        fields = ['id', 'bio', 'image', 'user']
 
     def create(self, validated_data):
         """Creates a new author"""

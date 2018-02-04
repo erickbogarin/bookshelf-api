@@ -8,7 +8,8 @@ class AuthorRelatedField(serializers.RelatedField):
         return Author.objects.all()
 
     def to_internal_value(self, data):
-        author, created = Author.objects.get_or_create(author=data, slug=data.lower())
+        author, created = Author.objects.get_or_create(
+            author=data, slug=data.lower())
 
         return author
 
