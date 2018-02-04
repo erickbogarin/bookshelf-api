@@ -17,7 +17,7 @@ REST API with Django
 
 ## To Do
 
-- [ ] Documentation of API endpoints
+- [x] Documentation of API endpoints
 - [ ] Create unit tests
 - [ ] Setup docker to simplify development
 - [ ] Use django permissions for particular operations
