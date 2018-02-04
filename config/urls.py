@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
+from rest_framework_swagger.views import get_swagger_view
 
 apipatterns = [
     url(r'^', include('apps.bookshelf.urls')),
@@ -24,7 +25,10 @@ apipatterns = [
     url(r'^', include('apps.products.urls')),
 ]
 
+schema_view = get_swagger_view(title='Bookshelf API')
+
 urlpatterns = [
+    url(r'^$', schema_view),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(apipatterns)),
     url(r'^rest-auth/', include('rest_auth.urls')),
