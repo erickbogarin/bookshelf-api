@@ -34,7 +34,7 @@ Make sure the following tools are installed and working:
 1. Create the database:
 
 ```bash
-$ CREATE DATABASE eshopper
+$ CREATE DATABASE database-name
 ```
 
 2. Create a new virtualenv
