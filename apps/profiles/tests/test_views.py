@@ -6,6 +6,7 @@ from django.test import TestCase
 
 from apps.profiles.models import Author
 from apps.profiles.serializers import AuthorSerializer
+from apps.profiles.exceptions import UsernameExists
 from django.contrib.auth.models import User
 
 
@@ -77,6 +78,7 @@ class CreateAuthorTest(APITestCase):
         invalid_data = {'user': {}}
 
         url = reverse('author-list')
+
         response = self.client.post(
             url,
             invalid_data,
@@ -86,6 +88,31 @@ class CreateAuthorTest(APITestCase):
         self.assertTrue('user' in response.data)
         self.assertTrue('username' in response.data['user'])
 
+    def test_fails_to_create_if_author_username_exists(self):
+        """
+        Ensure we can't create an author with a existing username
+        """
+
+        invalid_data = {
+            'user': {
+                'username': 't1'
+            }
+        }
+
+        url = reverse('author-list')
+
+        valid_response = self.client.post(
+            url,
+            self.valid_author,
+            format='json')
+
+        invalid_response = self.client.post(
+            url,
+            invalid_data,
+            format='json')
+
+        self.assertEqual(valid_response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(invalid_response.status_code, status.HTTP_400_BAD_REQUEST)
 
 class UpdateSingleAuthorTest(APITestCase):
     """ Test module for updating an existing author record """
@@ -152,9 +179,9 @@ class UpdateSingleAuthorTest(APITestCase):
         self.assertEqual(
             response.data['user']['last_name'], author_data['user']['last_name'])
 
-    def test_fails_to_update_if_author_username_field_is_duplicate(self):
+    def test_update_valid_author_username(self):
         """
-        Ensure we can't update an author with duplicate username
+        Ensure we can update an author with it's username
         """
 
         invalid_author_data = {
@@ -172,6 +199,27 @@ class UpdateSingleAuthorTest(APITestCase):
             data=invalid_author_data,
             format='json'
         )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_fails_to_update_if_author_username_field_is_duplicate(self):
+        """
+        Ensure we can't update an author with duplicate username
+        """
+
+        invalid_author_data = {
+            'user': {
+                'username': 'author.test.case'
+            }
+        }
+
+        url = reverse('author-list')
+
+        response = self.client.post(
+            url,
+            invalid_author_data,
+            format='json')
+
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
