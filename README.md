@@ -18,8 +18,8 @@ REST API with Django
 ## To Do
 
 - [x] Documentation of API endpoints
+- [x] Setup docker to simplify development
 - [ ] Create unit tests
-- [ ] Setup docker to simplify development
 - [ ] Use django permissions for particular operations
 
 ## Requirement Environment
@@ -30,6 +30,23 @@ Make sure the following tools are installed and working:
 - PostgresQL
 
 ## How to run this application
+
+Clone this repository:
+
+
+```bash
+$ git clone git@github.com:erickbogarin/bookshelf-api.git
+$ cd bookshelf-api
+```
+### Running with Docker
+
+```bash
+$ docker-compose up -d
+```
+
+Go to http://0.0.0.0:8000/ to see the app
+
+### Manually Deploying
 
 1. Create the database:
 
