@@ -23,10 +23,19 @@ class AuthorSerializer(serializers.ModelSerializer):
     """Handles serialization and deserialization of Author objects."""
 
     user = UserSerializer()
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Author
         fields = ['id', 'bio', 'image', 'user']
+
+
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image
+
+        return 'https://static.productionready.io/images/smiley-cyrus.jpg'
+
 
     def create(self, validated_data):
         """Creates a new author"""
