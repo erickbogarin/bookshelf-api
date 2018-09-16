@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets, status, filters
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
 from apps.profiles.models import Author
 from apps.profiles.serializers import AuthorSerializer
